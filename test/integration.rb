@@ -1296,5 +1296,15 @@ module Spreadsheet
       end
     end
 =end
+    def test_write_frozen_string
+      Spreadsheet.client_encoding = 'UTF-16LE'
+      book = Spreadsheet::Workbook.new
+      path = File.join @var, 'test_write_workbook.xls'
+      sheet1 = book.create_worksheet
+      str1 = "Frozen String".freeze
+      sheet1[0,0] = str1
+      sheet1.row(0).push str1
+      book.write path
+    end
   end
 end
